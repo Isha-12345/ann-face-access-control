@@ -1,0 +1,19 @@
+# Requirements for the TRAINING machine (laptop or Google Colab)
+# Install with:  pip install -r requirements-train.txt
+
+tensorflow==2.17.0
+numpy>=1.26,<2.2
+opencv-python>=4.9
+scikit-learn>=1.4
+pandas>=2.2
+matplotlib>=3.8
+
+# Notes
+# -----
+# * On a laptop with no GPU, use tensorflow-cpu instead of tensorflow.
+# * On Google Colab, TensorFlow is preinstalled; only run
+#     pip install opencv-python
+#   if the import fails.
+# * TensorFlow 2.17 is pinned because tf.lite.Interpreter is deprecated in
+#   2.20+. The code also works on newer versions (tflite_utils.py handles
+#   both import paths), but 2.17 avoids deprecation warnings in screenshots.

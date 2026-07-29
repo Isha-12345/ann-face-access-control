@@ -1,0 +1,30 @@
+# Requirements for the RASPBERRY PI (deployment only, no training)
+# Install with:  pip3 install -r requirements-pi.txt --break-system-packages
+#
+# Do NOT install full TensorFlow on the Pi. Only the TFLite runtime is
+# needed for inference, and it is far smaller and faster to install.
+
+numpy>=1.24
+opencv-python-headless>=4.9
+gpiozero>=2.0
+tflite-runtime>=2.14 ; platform_machine == "aarch64"
+
+# Notes
+# -----
+# 1. If pip cannot find tflite-runtime for your Pi OS version, install the
+#    newer package instead:
+#        pip3 install ai-edge-litert --break-system-packages
+#    tflite_utils.py automatically detects whichever one is present.
+#
+# 2. If you want the live preview window (not headless over SSH), install
+#    the full OpenCV build instead of the headless one:
+#        sudo apt install python3-opencv
+#
+# 3. gpiozero is preinstalled on Raspberry Pi OS. If LED control fails with
+#    a pin factory error, install the backend:
+#        sudo apt install python3-lgpio
+#
+# 4. For the Pi Camera Module on Raspberry Pi OS Bookworm, the camera is
+#    exposed through V4L2, so cv2.VideoCapture(0) works directly. If it
+#    does not, enable it with:
+#        sudo raspi-config   ->  Interface Options  ->  Camera

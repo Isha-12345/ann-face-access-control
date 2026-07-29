@@ -1,0 +1,33 @@
+# ============================================================
+# Raspberry Pi setup - ANN access control project
+# Open a terminal on the Pi (Ctrl+Alt+T) and run these.
+# Lines starting with # are comments - safe to paste, they do nothing.
+# ============================================================
+
+# --- 1. Go into the project folder ---
+cd ~/Downloads/pi_deploy 2>/dev/null || cd ~/pi_deploy
+ls
+
+# --- 2. Install dependencies (type your password when asked) ---
+sudo apt update
+sudo apt install -y python3-opencv python3-gpiozero python3-lgpio
+pip3 install ai-edge-litert --break-system-packages
+
+# --- 3. Test the model loads (no webcam needed) ---
+python3 -c "from tflite_utils import TFLiteModel; m=TFLiteModel('mobilenetv2_int8.tflite'); print('model OK, input', m.input_size)"
+
+# --- 4. Benchmark = report evidence, no webcam needed. Screenshot the output. ---
+python3 benchmark_pi.py --model mobilenetv2_int8.tflite --runs 100
+
+
+# ============================================================
+# TOMORROW - after plugging in the USB webcam and wiring the LEDs
+# ============================================================
+
+# --- 5. Test the camera sees the webcam ---
+python3 -c "import cv2; c=cv2.VideoCapture(0); print('camera ok:', c.read()[0]); c.release()"
+
+# --- 6. Run the live access-control demo ---
+python3 deploy_pi.py --model mobilenetv2_int8.tflite
+
+# (to run without the preview window, add --headless ; to pick another camera, add --camera 1)
