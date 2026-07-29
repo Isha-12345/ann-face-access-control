@@ -161,22 +161,4 @@ resistor, the short leg (cathode) to ground.
 
 ---
 
-## 5. Screenshot checklist for the report appendix
 
-The marking criteria award 10 marks for reproducibility and require
-evidence showing the device used. Capture:
-
-1. `pip install` output and `python -c "import tensorflow as tf; print(tf.__version__)"`
-2. `capture_faces.py` running with the detection box visible
-3. `build_dataset.py` final class counts
-4. Each `train_classifier.py` run, showing the final epoch
-5. `train_embedding.py` open-set results
-6. Each `evaluate.py` classification report
-7. `evaluate.py --compare` comparison table
-8. `quantize.py` size and accuracy summary
-9. `benchmark_pi.py` output **on the Pi** (shows the ARM processor)
-10. Photograph of the wired Pi with LEDs lit for each of the three states
-11. `logs/access_log.csv` opened, showing timestamped decisions
-
-Make sure the terminal prompt showing your username and machine is
-visible in every terminal screenshot.
